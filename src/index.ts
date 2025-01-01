@@ -37,3 +37,12 @@ const updateTask = (id: number, description: string): void => {
     writeTasks(tasks);
     console.log('Task updated succesfully');
 };
+
+// Delete a task
+const deleteTask = (id: number): void => {
+    const tasks = readTasks();
+    const updatedTasks = tasks.filter((t) => t.id !==id);
+    writeTasks(updatedTasks)
+    console.log('Task deleted succesfully');
+}
+
