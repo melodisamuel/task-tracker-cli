@@ -23,3 +23,17 @@ const addTask = (description: string): void => {
     writeTasks(tasks);
     console.log(`Task added succesfully (ID: ${newTask. id})`);
 };
+
+// Update an existing task
+const updateTask = (id: number, description: string): void => {
+    const tasks = readTasks();
+    const task = tasks.find((t) => t.id === id);
+    if(!task) {
+        console.log(`No task with ID ${id} found`);
+        return;
+    }
+    task.description = description;
+    task.updatedAt = new Date().toISOString();
+    writeTasks(tasks);
+    console.log('Task updated succesfully');
+};
