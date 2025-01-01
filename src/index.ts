@@ -46,3 +46,17 @@ const deleteTask = (id: number): void => {
     console.log('Task deleted succesfully');
 }
 
+// Mark a task's status as 'todo' | 'in progress' | 'done'
+const markTask = (id: number, status: 'in-progress' | 'done'): void => {
+    const tasks = readTasks();
+    const task = tasks.find((t) => t.id === id);
+    if(!task) {
+        console.log(`No task found with ID ${id}`);
+        return;
+    }
+    task.status = status;
+    task.updatedAt = new Date().toISOString();
+    writeTasks(tasks);
+    console.log(`Task marked as ${status} (ID: ${id})`);
+}
+
