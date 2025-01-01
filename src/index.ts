@@ -60,3 +60,10 @@ const markTask = (id: number, status: 'in-progress' | 'done'): void => {
     console.log(`Task marked as ${status} (ID: ${id})`);
 }
 
+//List tasks
+const listTasks = (status?: 'todo' | 'in progress' | 'done'): void => {
+    const tasks = readTasks();
+    const filteredTasks = status ? tasks.filter((t) => t.status === status) : tasks;
+    console.log(filteredTasks);
+}
+
