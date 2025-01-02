@@ -1,11 +1,4 @@
-// Task Interface
-interface Task {
-    id: number;
-    description: string;
-    status: 'todo' | 'in progress' | 'done';
-    createdAt: string;
-    updatedAt: string;
-} 
+import { Task } from '../src/tasks.js';
 
 import { readTasks, writeTasks } from '../src/utils';
 
@@ -47,7 +40,7 @@ const deleteTask = (id: number): void => {
 }
 
 // Mark a task's status as 'todo' | 'in progress' | 'done'
-const markTask = (id: number, status: 'in-progress' | 'done'): void => {
+const markTask = (id: number, status: 'in progress' | 'done'): void => {
     const tasks = readTasks();
     const task = tasks.find((t) => t.id === id);
     if(!task) {
@@ -67,3 +60,30 @@ const listTasks = (status?: 'todo' | 'in progress' | 'done'): void => {
     console.log(filteredTasks);
 }
 
+
+const args = process.argv.slice(2);
+const command = args[0];
+
+switch (command) {
+    case 'add':
+        addTask(args.slice(1).join(' '));
+        break;
+    case 'update':
+        updateTask(parseInt(args[1], 10), args.slice(2).join(''));
+        break;
+    case 'delete':
+        deleteTask(parseInt(args[1], 10));
+        break;
+    case 'mark-in-progress':
+        markTask(parseInt(args[1], 10), 'in progress');
+        break;
+    case 'mark-done':
+        markTask(parseInt(args[1], 10), 'done');
+        break;
+    case 'list':
+        listTasks(args[1] as 'todo' | 'in progress' | 'done');
+        break;            
+        default:
+            console.error('Unknown command.');
+            console.error('Available commands: add, update, delete, mark-in-progress, mark-done, list');    
+}

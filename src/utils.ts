@@ -1,6 +1,8 @@
 import { table } from 'console';
 import fs from 'fs';
 
+
+
 // Read tasks from the json file 
 export const readTasks = (): Task[] => {
     try {
